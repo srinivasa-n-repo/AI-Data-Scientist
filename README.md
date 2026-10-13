@@ -1,3 +1,202 @@
+# Data Scientist AI Agent
+
+An AI-powered **Data Scientist Agent** built using **CrewAI, Amazon Bedrock, and Amazon Bedrock AgentCore**.
+
+The application allows users to upload a dataset and interact with an AI data science crew that can analyze the data, build machine learning models, evaluate results, and generate useful artifacts such as reports, plots, and Jupyter notebooks.
+
+## What the Application Does
+
+The application acts as an AI data scientist that can work with user-provided datasets.
+
+A user can:
+
+* Upload a dataset
+* Provide a natural-language data science request
+* Ask the AI agent to analyze the dataset
+* Build and evaluate machine learning models
+* Compare different approaches
+* Receive generated reports and visualizations
+* Review generated notebooks and other artifacts
+* Interact with the agent when additional input is required
+* Continue the analysis with follow-up requests
+
+The application supports both **autopilot** and **copilot** style interactions.
+
+## How It Works
+
+```text
+User
+ │
+ │ Upload Dataset + Prompt
+ ▼
+Web Application
+ │
+ ▼
+Amazon S3
+ │
+ │ Dataset
+ ▼
+Amazon Bedrock AgentCore
+ │
+ ▼
+CrewAI Data Scientist Crew
+ │
+ ├── Data Analysis
+ ├── Data Processing
+ ├── Model Development
+ ├── Model Evaluation
+ └── Result Generation
+ │
+ ▼
+Generated Artifacts
+ │
+ ├── Reports
+ ├── Plots
+ └── Jupyter Notebook
+ │
+ ▼
+Amazon S3
+ │
+ ▼
+Web Application
+```
+
+The dataset is stored in Amazon S3 and made available to the data science agent. The CrewAI pipeline performs the requested analysis and generates the required outputs. The resulting artifacts are stored in S3 and made available to the user through presigned URLs.
+
+## AI Data Scientist Crew
+
+The core of the application is a **CrewAI-based data scientist pipeline**.
+
+The crew can perform data science tasks based on the user's request, including:
+
+* Dataset exploration
+* Data preprocessing
+* Feature analysis
+* Machine learning model development
+* Model evaluation
+* Model comparison
+* Visualization
+* Report generation
+
+The user can provide instructions in natural language, for example:
+
+```text
+Predict Price using a regression model and evaluate
+the model using RMSE.
+```
+
+The agent determines the appropriate data science workflow and executes it.
+
+## Human-in-the-Loop
+
+The application supports human interaction during the data science workflow.
+
+If the agent requires additional information or a decision from the user, it can return a question:
+
+```text
+Agent
+  │
+  ▼
+Question
+  │
+  ▼
+User Answer
+  │
+  ▼
+Agent resumes analysis
+```
+
+The conversation is maintained using an AgentCore session, allowing the data science workflow to continue after the user responds.
+
+## Generated Outputs
+
+After completing an analysis, the application can generate artifacts such as:
+
+* Data science reports
+* Data visualizations
+* Jupyter notebooks
+* Model evaluation results
+* Other analysis artifacts
+
+These artifacts are stored in Amazon S3 and exposed to the frontend through presigned URLs.
+
+## Web Application
+
+The project includes a browser-based interface that allows users to:
+
+1. Sign in using Amazon Cognito
+2. Upload datasets
+3. Enter a data science prompt
+4. Start an analysis
+5. View streaming agent responses
+6. Respond to agent questions
+7. View generated reports and visualizations
+8. Continue with follow-up analysis
+
+## Technology Stack
+
+| Technology                   | Purpose                               |
+| ---------------------------- | ------------------------------------- |
+| **Python**                   | Application and data science workflow |
+| **CrewAI**                   | Multi-agent data science workflow     |
+| **Amazon Bedrock**           | Foundation models                     |
+| **Amazon Bedrock AgentCore** | Agent runtime and sessions            |
+| **Amazon S3**                | Dataset and artifact storage          |
+| **Amazon Cognito**           | User authentication                   |
+| **Amazon CloudFront**        | Frontend and AgentCore access         |
+| **ECR**                      | Container image storage               |
+| **AWS CodeBuild**            | Container build and deployment        |
+
+## Project Structure
+
+```text
+.
+├── agentcore_app.py       # AgentCore application entrypoint
+├── crew_ds.py             # Data Scientist CrewAI workflow
+├── s3_store.py            # S3 dataset and artifact operations
+├── requirements.txt       # Python dependencies
+├── static/
+│   └── index.html         # Web application
+└── main.py                # Previous FastAPI implementation
+```
+
+## Key Features
+
+### Dataset Analysis
+
+Users can provide datasets stored in Amazon S3 and ask the AI data scientist to perform analysis.
+
+### Machine Learning
+
+The agent can develop and evaluate machine learning solutions based on the requested problem.
+
+### Streaming Responses
+
+Agent responses are streamed to the browser so users can observe the progress of the analysis.
+
+### Human-in-the-Loop
+
+The agent can pause and request additional information from the user before continuing.
+
+### Artifact Generation
+
+The application produces reusable outputs such as reports, plots, and notebooks.
+
+### Follow-Up Analysis
+
+Users can continue an existing session with additional requests, such as:
+
+```text
+Also try a GradientBoosting model and compare the results.
+```
+
+## Overall
+
+This application provides an **AI-powered data science workspace** where users can interact with a data scientist agent using natural language instead of manually implementing every step of the data science workflow.
+
+The combination of **CrewAI + Amazon Bedrock + AgentCore + S3** provides the foundation for an interactive, cloud-based AI data science platform.
+
+
 # Shipping the Data Scientist crew on Amazon Bedrock AgentCore
 
 This converts the FastAPI/WebSocket app into an **AgentCore Runtime** agent. The

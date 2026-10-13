@@ -1,0 +1,1 @@
+Feature engineering completed. Transformations applied: Price (log), Automatic (log), Age (sqrt), HP (sqrt), MetColor (sqrt), CC (sqrt). One-hot encoded FuelType (3 categories -> 2 dummy columns). Final feature set has 11 columns. Saved as df_features.parquet.

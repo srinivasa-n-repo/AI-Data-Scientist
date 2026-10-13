@@ -1,0 +1,6 @@
+Dataset shape before cleaning: (1435, 10)
+Shape after cleaning (dropping duplicates + CC outliers): (1314, 10)
+Missingness: No missing values in any column.
+Duplicates removed: 1 row.
+Outlier handling: Only CC had >5% outliers (8.5%); removed those 122 rows.
+All other columns either had <=5% outliers or were binary/target.

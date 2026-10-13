@@ -1,0 +1,20 @@
+# --- AgentCore Runtime ---
+bedrock-agentcore
+
+# --- Agent framework + LLM routing (Bedrock via LiteLLM) ---
+crewai
+litellm
+boto3
+
+# --- Data science stack the crew's execute_python leans on ---
+# Baked in so the runtime rarely needs the auto-pip-install fallback (which is
+# slow and may be blocked). Add anything else your workloads commonly import.
+pandas
+numpy
+scipy
+pyarrow
+scikit-learn
+matplotlib
+seaborn
+xgboost
+openpyxl
